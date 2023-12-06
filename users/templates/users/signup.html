@@ -10,28 +10,7 @@
 <html lang="en">
   <!-- ... Your existing HTML structure ... -->
 
-<script>
-  function togglePasswordVisibility() {
-      const passwordInput = document.getElementById('password'
-      passwordInput.type = passwordInput.type === 'password' ; 'text' : 'password'; }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const dropdownToggle = document.getElementById("user-menu-button");
-    const dropdownMenu = document.getElementById("user-dropdown");
-
-    dropdownToggle.addEventListener("click", function () {
-      dropdownMenu.classList.toggle("hidden");
-      // Add logic to close other open dropdowns if needed
-    });
-
-    // Add logic to close the dropdown when clicking outside of it if needed
-    document.addEventListener("click", function (event) {
-      if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
-        dropdownMenu.classList.add("hidden");
-      }
-    });
-  });
-</script>
 
 <html lang="en scroll-smooth">
   <style>
@@ -81,6 +60,8 @@
   </head>
   </head>
   <body class="overflow-x-hidden bg-tahackBg">
+
+
     <header class="bg-transparent body-font top-0 sticky z-50 w-screen">
       <nav class="bg-tahack">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2">
@@ -168,12 +149,13 @@
     <p class="text-gray-600 mb-6">Enter your personal details and start your journey with us.</p>
 
     <!-- Form -->
-    <form class="flex flex-wrap -mx-4 items-center justify-center">
+    <form class="flex flex-wrap -mx-4 items-center justify-center" method="POST" class="mt-4">
+      {% csrf_token %}
 
         <!-- First Name -->
         <div class="mb-4 w-full md:w-1/2 px-4">
-            <label for="first_name" class="block text-gray-600 text-sm font-semibold mb-2">First Name</label>
-            <input type="text" id="first_name" name="first_name" class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500" required>
+            <label for="{{ form.username.id_for_label }}" class="block text-gray-600 text-sm font-semibold mb-2">First Name</label>
+            <input type="text" id="{{ form.username.id }}" name="{{ form.username.name }}" placeholder="Username..." class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500" required>
         </div>
 
         <!-- Last Name -->
@@ -194,7 +176,7 @@
 
         <!-- Email -->
         <div class="mb-4 w-full md:w-1/2 px-4">
-            <label for="email" class="block text-gray-600 text-sm font-semibold mb-2">Email</label>
+            <label for="{{ form.username.id_for_label }}" class="block text-gray-600 text-sm font-semibold mb-2">Email</label>
             <input type="email" id="email" name="email" class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500" required>
         </div>
 
@@ -247,5 +229,8 @@
     </div>
   </div>
 </div>
+
+
+
   </body>
 </html>
